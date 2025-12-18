@@ -1,0 +1,29 @@
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
+import { UserService } from './user.service';
+import { UserDto } from './dto/userdto';
+
+@Controller('user')
+export class UserController {
+  constructor(private readonly userService: UserService) {}
+
+  @Post('register')
+  async register(@Body() userDto: UserDto) {
+    try {
+      return await this.userService.create(userDto);
+    } catch (err: unknown) {
+      // 使用 unknown 类型替代 any
+      // 使用类型守卫确保 err 是 Error 类型
+      if (err instanceof Error) {
+        throw new HttpException(err.message, HttpStatus.BAD_REQUEST);
+      }
+      // 如果不是 Error 类型，使用默认错误消息
+      throw new HttpException('注册失败，请稍后重试', HttpStatus.BAD_REQUEST);
+    }
+  }
+}

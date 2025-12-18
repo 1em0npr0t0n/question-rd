@@ -8,6 +8,7 @@ import {
   HttpException,
   HttpStatus,
   Query,
+  Delete,
 } from '@nestjs/common';
 import { QuestionDto } from './dto/question.dto';
 import { QuestionService } from './question.service';
@@ -20,27 +21,34 @@ export class QuestionController {
     throw new HttpException('获取数据失败', HttpStatus.BAD_REQUEST);
   }
 
-  @Post()
+  @Post() //增
   create() {
     return this.questionService.create();
   }
 
   @Get()
-  findAll(
+  async findAll(
     @Query('keyword') keyword: string,
     @Query('page') page: string,
     @Query('pageSize') pageSize: string,
   ) {
-    return { keyword: keyword, page: page, pageSize: pageSize };
+    const { list, total } = await this.questionService.findAllList({
+      keyword: keyword,
+      page: Number(page),
+      pageSize: Number(pageSize),
+    });
+    return { list, count: total };
   }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.questionService.findOne(id);
   }
-  @Patch(':id')
+  @Patch(':id') //改
   UpdateOne(@Param('id') id: string, @Body() questionDto: QuestionDto) {
-    //body
-    console.log('questionDto', questionDto);
-    return { id };
+    return this.questionService.update(id, questionDto);
+  }
+  @Delete(':id') //删
+  deleteOne(@Param('id') id: string) {
+    return this.questionService.delete(id);
   }
 }
