@@ -14,7 +14,7 @@ import { QuestionService } from './question.service';
 
 @Controller('question')
 export class QuestionController {
-  constructor(private readonly questionSerive: QuestionService) {}
+  constructor(private readonly questionService: QuestionService) {}
   @Get('test')
   getTest(): string {
     throw new HttpException('获取数据失败', HttpStatus.BAD_REQUEST);
@@ -22,7 +22,7 @@ export class QuestionController {
 
   @Post()
   create() {
-    return this.questionSerive.create();
+    return this.questionService.create();
   }
 
   @Get()
@@ -35,7 +35,7 @@ export class QuestionController {
   }
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.questionSerive.findOne(id);
+    return this.questionService.findOne(id);
   }
   @Patch(':id')
   UpdateOne(@Param('id') id: string, @Body() questionDto: QuestionDto) {
