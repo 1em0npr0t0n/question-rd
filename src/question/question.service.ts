@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Question, QuestionDocument } from './schemas/question.schema';
 import { Model } from 'mongoose';
 import { QuestionDto } from './dto/question.dto';
+import { JwtPayload } from 'src/auth/constants';
 
 @Injectable()
 export class QuestionService {
@@ -11,10 +12,12 @@ export class QuestionService {
     private readonly questionModel: Model<QuestionDocument>,
   ) {}
 
-  async create() {
+  async create(user: JwtPayload) {
     const question = new this.questionModel({
       title: 'titile' + Date.now(),
       desc: 'desc',
+      userId: user.result._id,
+      userName: user.result.username,
     });
     return await question.save();
   }

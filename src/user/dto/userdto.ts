@@ -3,7 +3,7 @@ export class UserDto {
   email: string;
   password: string;
   nickname?: string;
-  role: string;
-  isActive: boolean;
-  phone: string;
+  role?: string;
+  isActive?: boolean;
+  phone?: string;
 }

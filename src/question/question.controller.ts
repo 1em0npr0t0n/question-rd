@@ -9,9 +9,11 @@ import {
   HttpStatus,
   Query,
   Delete,
+  Request,
 } from '@nestjs/common';
 import { QuestionDto } from './dto/question.dto';
 import { QuestionService } from './question.service';
+import { JwtPayload } from 'src/auth/constants';
 
 @Controller('question')
 export class QuestionController {
@@ -22,7 +24,9 @@ export class QuestionController {
   }
 
   @Post() //增
-  create() {
+  create(@Request() req: Request & { user: JwtPayload }) {
+    //const { result } = req as JwtPayload;
+    console.log(req['user']);
     return this.questionService.create();
   }
 
