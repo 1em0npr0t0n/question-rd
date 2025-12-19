@@ -7,6 +7,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api'); //全局路径
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.enableCors();
   await app.listen(process.env.PORT ?? 3005);
 }
 bootstrap();

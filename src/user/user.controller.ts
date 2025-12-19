@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
+  Redirect,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/userdto';
@@ -26,5 +28,17 @@ export class UserController {
       // 如果不是 Error 类型，使用默认错误消息
       throw new HttpException('注册失败，请稍后重试', HttpStatus.BAD_REQUEST);
     }
+  }
+  @Public()
+  @Get('info')
+  @Redirect('/api/auth/profile', 302)
+  info() {
+    return;
+  }
+  @Public()
+  @Post('login')
+  @Redirect('/api/auth/login', 307)
+  login() {
+    return;
   }
 }

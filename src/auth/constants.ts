@@ -4,10 +4,10 @@ export const jwtConstants = {
 };
 // 定义JWT Payload接口
 export interface JwtPayload {
-  result: {
-    _id: string;
-    username: string;
-    email: string;
-    nickname: string;
-  };
+  _id: string;
+  username: string;
+  email: string;
+  nickname?: string;
+  iat: number;
+  exp: number;
 }

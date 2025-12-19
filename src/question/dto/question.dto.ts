@@ -2,4 +2,5 @@
 export class QuestionDto {
   readonly title: string;
   readonly desc: string;
+  readonly ids: string[];
 }

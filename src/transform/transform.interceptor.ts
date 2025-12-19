@@ -19,7 +19,7 @@ export class TransformInterceptor<T> implements NestInterceptor<
     return next.handle().pipe(
       map((d: T) => {
         const r: ApiResponse<T> = {
-          error: 0,
+          errno: 0,
           data: d, // 此时 data 的类型是 T，而不是 any
         };
         return r;

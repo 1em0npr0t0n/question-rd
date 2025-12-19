@@ -18,7 +18,6 @@ export class AuthController {
   //@UseGuards(AuthGuard)
   @Get('profile')
   profile(@Request() req: Request & { user: JwtPayload }) {
-    //console.log(req);
     return req['user'];
   }
 }
