@@ -13,6 +13,7 @@ import { Question, QuestionSchema } from './schemas/question.schema';
       },
     ]),
   ],
+  exports: [QuestionService],
   controllers: [QuestionController],
   providers: [QuestionService],
 })

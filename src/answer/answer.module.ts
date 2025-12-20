@@ -8,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     MongooseModule.forFeature([{ schema: AnswerSchema, name: Answer.name }]),
   ],
+  exports: [AnswerService],
   controllers: [AnswerController],
   providers: [AnswerService],
 })
