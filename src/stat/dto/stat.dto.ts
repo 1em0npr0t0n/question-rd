@@ -1,3 +1,51 @@
+export interface StatComponentDto {
+  list: StatComponentItemDto[];
+}
+export interface StatComponentItemDto {
+  [key: string]: string;
+}
+export interface StatQuestionComponent {
+  fe_id: string; //来自前端的组件ID
+  type: string; //组件类型
+  title: string; //组件标题
+  isHidden: boolean; //是否隐藏
+  isLock: boolean; //是否锁定组件
+  props: object; //组件属性
+}
+export interface StatQuestionComponent {
+  fe_id: string; //来自前端的组件ID
+  type: string; //组件类型
+  title: string; //组件标题
+  isHidden: boolean; //是否隐藏
+  isLock: boolean; //是否锁定组件
+  props: object; //组件属性
+}
+export interface StatAnswerComponent {
+  componentId: string;
+  value: string;
+}
+export interface CheckboxComponentProps {
+  title: string;
+  isVertical: boolean;
+  list: {
+    label: string;
+    value: string;
+    checked: boolean;
+  }[];
+}
+export interface RadioComponentProps {
+  title: string;
+  isVertical: boolean;
+  options: {
+    label: string;
+    value: string;
+  }[];
+}
+export interface StatComponentCountDto {
+  name: string;
+  value: string;
+  count: number;
+}
 /**
  * 
             "list": [
@@ -37,9 +85,3 @@
 
 ] 
  */
-export interface StatComponentDto {
-  list: StatComponentItemDto[];
-}
-export interface StatComponentItemDto {
-  [key: string]: string;
-}

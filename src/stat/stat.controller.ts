@@ -39,14 +39,41 @@ export class StatController {
     @Query('page') page: string,
     @Query('pageSize') pageSize: string,
   ) {
+    const noData = { list: [], total: 0 };
+    if (!questionId) {
+      return noData;
+    }
     const { list, total } = await this.answerService.findAllList(
       questionId,
       parseInt(page),
       parseInt(pageSize),
     );
+    if (!list || list.length === 0) {
+      return noData;
+    }
+    const statComponentDtoList =
+      await this.statService.AnswerListToStatComponent(list, questionId);
+    if (
+      !statComponentDtoList ||
+      statComponentDtoList.list.length !== list.length
+    ) {
+      return noData;
+    }
     return {
-      list,
+      list: statComponentDtoList.list,
       total,
     };
+  }
+  @Get(':questionId/:componentId')
+  async findComponentValues(
+    @Param('questionId') questionId: string,
+    @Param('componentId') componentId: string,
+  ) {
+    const stat = await this.statService.findComponentValues(
+      questionId,
+      componentId,
+    );
+    console.log('i', stat);
+    return { stat: stat };
   }
 }

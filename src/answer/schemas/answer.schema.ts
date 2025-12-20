@@ -8,8 +8,8 @@ export class Answer {
 
   @Prop()
   answerList: {
-    componentFeid: string;
-    value: string[];
+    componentId: string;
+    value: string;
   }[];
 }
 export const AnswerSchema = SchemaFactory.createForClass(Answer);
