@@ -73,7 +73,7 @@ export class StatController {
       questionId,
       componentId,
     );
-    console.log('i', stat);
-    return { stat: stat };
+    //console.log('i', stat);
+    return { stat };
   }
 }
