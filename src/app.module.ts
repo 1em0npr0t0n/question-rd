@@ -15,7 +15,7 @@ import { StatModule } from './stat/stat.module';
       envFilePath: ['.env.development.local', '.env.development'],
     }),
     MongooseModule.forRoot(
-      `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}`,
+      `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}?authSource=admin`,
     ),
     QuestionModule,
     UserModule,
